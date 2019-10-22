@@ -42,12 +42,11 @@ if (process.env.NODE_ENV != 'production') {
 }
 
 app.get('/welcome', function(req, res) {
-	// 	if (req.session.userId) {
-	// 		res.redirect('/');
-	// 	} else {
-	// 		res.sendFile(__dirname + '/index.html');
-	// 	}
-	res.sendFile(__dirname + '/index.html');
+	if (req.session.userId) {
+		res.redirect('/');
+	} else {
+		res.sendFile(__dirname + '/index.html');
+	}
 });
 
 app.post('/register', (req, res) => {
@@ -62,9 +61,8 @@ app.post('/register', (req, res) => {
 		db
 			.registeringUsers(first_name, last_name, email, hash)
 			.then(({ rows }) => {
-				console.log('this is the text that Vera wants me to write', rows);
 				req.session.userId = rows[0].id;
-				res.json();
+				res.json({ success: true });
 			})
 			.catch((err) => {
 				console.log('error happened, maybe user typed an existing-email.', err);
@@ -74,12 +72,11 @@ app.post('/register', (req, res) => {
 
 // Fall route, don't delete
 app.get('*', function(req, res) {
-	// if (!req.session.userId) {
-	// 	res.redirect('/welcome');
-	// } else {
-	// 	res.sendFile(__dirname + '/index.html');
-	// }
-	res.sendFile(__dirname + '/index.html');
+	if (!req.session.userId) {
+		res.redirect('/welcome');
+	} else {
+		res.sendFile(__dirname + '/index.html');
+	}
 });
 
 app.listen(8080, function() {
