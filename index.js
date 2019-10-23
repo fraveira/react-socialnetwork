@@ -57,6 +57,8 @@ app.get('/welcome', function(req, res) {
 	}
 });
 
+// Register route.
+
 app.post('/register', (req, res) => {
 	console.log(req.body.email);
 	console.log(req.body.password);
@@ -76,6 +78,40 @@ app.post('/register', (req, res) => {
 				console.log('error happened, maybe user typed an existing-email.', err);
 			});
 	});
+});
+
+// Login route
+
+app.post('/login', (req, res) => {
+	let email = req.body.email;
+	let submittedPass = req.body.password;
+	let userPassword;
+	console.log('User email', email);
+	db
+		.retrievingPassword(email)
+		.then(({ rows }) => {
+			console.log('Rows are here', rows);
+			userPassword = rows[0].password;
+			return userPassword;
+		})
+		.then((userPassword) => {
+			return bcrypt.compare(submittedPass, userPassword); // compares given password and existing password.
+		})
+		.then((areTheSame) => {
+			if (areTheSame) {
+				console.log('Are they the same inside?');
+				db.loggedId(email).then((id) => {
+					req.session.userId = id.rows[0].id;
+					res.json({ success: true });
+				});
+			} else {
+				res.json({ success: false });
+			}
+		})
+		.catch((error) => {
+			console.log('This is catching an error happening in comparing passwords', error);
+			res.json({ success: false });
+		});
 });
 
 // Fall route, don't delete

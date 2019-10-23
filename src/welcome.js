@@ -1,5 +1,7 @@
 import React from 'react';
+import { HashRouter, Route } from 'react-router-dom';
 import Register from './register';
+import Login from './login';
 
 const imgStyle = {
 	width: '45em'
@@ -14,9 +16,12 @@ export default function Welcome() {
 		<div style={layoutWelcome}>
 			<img style={imgStyle} src="/assets/reactlogo.svg" />
 			<h2>Welcome to your Social Network!</h2>
-			<Register />
+			<HashRouter>
+				<div>
+					<Route exact path="/" component={Register} />
+					<Route path="/login" component={Login} />
+				</div>
+			</HashRouter>
 		</div>
 	);
 }
-
-// Here goes the second part.

@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from './axios';
-import { Link } from 'react-router-dom';
 
 const welcomeForm = {
 	display: 'block',
@@ -9,7 +8,7 @@ const welcomeForm = {
 	marginBottom: '5px'
 };
 
-export default class Register extends React.Component {
+export default class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -22,22 +21,26 @@ export default class Register extends React.Component {
 
 	submit() {
 		axios
-			.post('/register', {
-				first: this.state.first,
-				last: this.state.last,
+			.post('/login', {
 				email: this.state.email,
 				password: this.state.password
 			})
 			.then(({ data }) => {
 				console.log('Info importante', data);
 				if (data.success) {
-					console.log('We arrived to data succesful');
+					console.log('Login succesful');
 					location.replace('/');
 				} else {
 					this.setState({
 						error: true
 					});
 				}
+			})
+			.catch((error) => {
+				console.log('Error logging in', error);
+				this.setState({
+					error: true
+				});
 			});
 	}
 
@@ -45,22 +48,6 @@ export default class Register extends React.Component {
 		return (
 			<div>
 				{this.state.error && <div className="error"> Oops! That was your fault</div>}
-				<label>First Name</label>
-				<input
-					style={welcomeForm}
-					name="first"
-					placeholder="First Name"
-					id="first"
-					onChange={(e) => this.handleChange(e)}
-				/>
-				<label>Last Name</label>
-				<input
-					style={welcomeForm}
-					name="last"
-					placeholder="Last Name"
-					id="last"
-					onChange={(e) => this.handleChange(e)}
-				/>
 				<label>E-Mail</label>
 				<input
 					type="email"
@@ -80,7 +67,6 @@ export default class Register extends React.Component {
 					onChange={(e) => this.handleChange(e)}
 				/>
 				<button onClick={() => this.submit()}>Submit</button>
-				<Link to="/login">Click here to Log in!</Link>
 			</div>
 		);
 	}
