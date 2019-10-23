@@ -4,6 +4,7 @@ const compression = require('compression');
 const db = require('./db');
 const cookieSession = require('cookie-session');
 const bcrypt = require('./bcrypt');
+const csurf = require('csurf');
 
 app.use(compression());
 
@@ -12,6 +13,13 @@ app.use(compression());
 app.use(express.static('./public'));
 
 app.use(express.json());
+
+app.use(csurf());
+
+app.use(function(req, res, next) {
+	res.cookie('mytoken', req.csrfToken());
+	next();
+});
 
 // Middleware
 
