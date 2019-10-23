@@ -14,13 +14,6 @@ app.use(express.static('./public'));
 
 app.use(express.json());
 
-app.use(csurf());
-
-app.use(function(req, res, next) {
-	res.cookie('mytoken', req.csrfToken());
-	next();
-});
-
 // Middleware
 
 app.use(
@@ -29,6 +22,13 @@ app.use(
 		maxAge: 1000 * 60 * 60 * 24 * 14
 	})
 );
+
+app.use(csurf());
+
+app.use(function(req, res, next) {
+	res.cookie('mytoken', req.csrfToken());
+	next();
+});
 
 app.use(
 	express.urlencoded({

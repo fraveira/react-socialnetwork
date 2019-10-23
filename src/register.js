@@ -1,5 +1,13 @@
 import React from 'react';
 import axios from './axios';
+import { Link } from 'react-router-dom';
+
+const welcomeForm = {
+	display: 'block',
+	margin: 'auto',
+	marginTop: '10px',
+	marginBottom: '5px'
+};
 
 export default class Register extends React.Component {
 	constructor(props) {
@@ -36,12 +44,46 @@ export default class Register extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.state.error && <div className="error"> Oops! That was your fault</div>}
-				<input name="first" onChange={(e) => this.handleChange(e)} />
-				<input name="last" onChange={(e) => this.handleChange(e)} />
-				<input name="email" onChange={(e) => this.handleChange(e)} />
-				<input name="password" onChange={(e) => this.handleChange(e)} />
-				<button onClick={() => this.submit()}>Submit</button>
+				{' '}
+				<form>
+					{this.state.error && <div className="error"> Oops! That was your fault</div>}
+					<label>First Name</label>
+					<input
+						style={welcomeForm}
+						name="first"
+						placeholder="First Name"
+						id="first"
+						onChange={(e) => this.handleChange(e)}
+					/>
+					<label>Last Name</label>
+					<input
+						style={welcomeForm}
+						name="last"
+						placeholder="Last Name"
+						id="last"
+						onChange={(e) => this.handleChange(e)}
+					/>
+					<label>E-Mail</label>
+					<input
+						type="email"
+						style={welcomeForm}
+						name="email"
+						placeholder="E-mail"
+						id="email"
+						onChange={(e) => this.handleChange(e)}
+					/>
+					<label>Password</label>
+					<input
+						style={welcomeForm}
+						name="password"
+						placeholder="Password"
+						id="password"
+						type="password"
+						onChange={(e) => this.handleChange(e)}
+					/>
+					<button onClick={() => this.submit()}>Submit</button>
+				</form>
+				<p>Broken link to nowhere</p>
 			</div>
 		);
 	}
