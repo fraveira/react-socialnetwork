@@ -14,16 +14,15 @@ export class App extends React.Component {
 			uploaderIsVisible: false
 		};
 		this.toggleModal = this.toggleModal.bind(this);
+		this.setImage = this.setImage.bind(this);
 	}
 
 	async componentDidMount() {
 		console.log('App mounted!!');
 		axios.get('/user').then(({ data }) => {
 			this.setState(data);
+			console.log('This is setState', this.state);
 		});
-
-		const { data } = await axios.get('/user');
-		this.setState(data);
 	}
 	toggleModal() {
 		console.log('I am Togglemodal');
@@ -34,8 +33,9 @@ export class App extends React.Component {
 		}
 	}
 
-	upload(something) {
-		console.log('this does nothing');
+	setImage(profilepicture) {
+		console.log('Qué es imgUrl???', profilepicture);
+		this.setState({ profilepicture: profilepicture });
 	}
 
 	methodInApp() {
@@ -46,9 +46,17 @@ export class App extends React.Component {
 		return (
 			<div>
 				<h1 onClick={this.toggleModal}>Hello from App!!!</h1>
-				<ProfilePic firstName={this.state.first} lastName={this.state.last} imgUrl={this.state.img} />
-				{this.state.uploaderIsVisible && <Uploader upload={this.upload()} />}
+				<ProfilePic
+					first={this.state.first}
+					last={this.state.last}
+					profilepicture={this.state.profilepicture}
+				/>
+				{this.state.uploaderIsVisible && <Uploader setImage={this.setImage} />}
 			</div>
 		);
 	}
 }
+
+// if (!this.state.profilepicture) {
+//     return A loading div. ..
+// }

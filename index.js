@@ -142,6 +142,7 @@ app.post('/login', (req, res) => {
 app.get('/user', async (req, res) => {
 	try {
 		const { rows } = await db.getUserById(req.session.userId);
+		console.log('This is what we are doing now', rows[0]);
 		res.json(rows[0]); // TESTED, this is returning user_id who logged.
 	} catch (err) {
 		console.log(err);
@@ -152,17 +153,12 @@ app.get('/user', async (req, res) => {
 // Upload route:
 
 app.post('/upload', uploader.single('image'), s3.upload, function(req, res) {
-	// const { username, title, desc } = req.body; // These don't exist-
 	const imageUrl = `${s3Url}${req.file.filename}`;
-	// We are never coming here.
-	// I think I am somehow creating a new row, instad of pasting the url in the corresponding row
-	// To the id. I don't know how to debug it.
-	// It looks like the url of the picture is the user id instead of the URL.
 	db
 		.addProfilePic(req.session.userId, imageUrl)
 		.then(function({ rows }) {
 			console.log('This is supposed to be what we are sending', rows);
-			res.json(rows);
+			res.json(rows[0]);
 		})
 		.catch(function(err) {
 			console.log(err);

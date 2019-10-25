@@ -19,9 +19,12 @@ module.exports.loggedId = (email) => {
 };
 
 module.exports.getUserById = (id) => {
-	return db.query(`SELECT id AS user_id FROM users WHERE id = $1`, [ id ]);
+	return db.query(`SELECT id, first, last, profilepicture, bio FROM users WHERE id = $1`, [ id ]);
 };
 
 module.exports.addProfilePic = (id, profilepicture) => {
-	return db.query(`UPDATE users SET profilepicture=$2 WHERE id = $1`, [ id, profilepicture ]);
+	return db.query(`UPDATE users SET profilepicture=$2 WHERE id = $1 RETURNING profilepicture`, [
+		id,
+		profilepicture
+	]);
 };
