@@ -19,6 +19,26 @@ app.use(express.static('./public'));
 
 app.use(express.json());
 
+// Upload storage logic:
+
+const diskStorage = multer.diskStorage({
+	destination: function(req, file, callback) {
+		callback(null, __dirname + '/uploads');
+	},
+	filename: function(req, file, callback) {
+		uidSafe(24).then(function(uid) {
+			callback(null, uid + path.extname(file.originalname));
+		});
+	}
+});
+
+const uploader = multer({
+	storage: diskStorage,
+	limits: {
+		fileSize: 3097152
+	}
+});
+
 // Middleware
 
 app.use(
@@ -127,6 +147,27 @@ app.get('/user', async (req, res) => {
 		console.log(err);
 		res.sendStatus(500);
 	}
+});
+
+// Upload route:
+
+app.post('/upload', uploader.single('image'), s3.upload, function(req, res) {
+	// const { username, title, desc } = req.body; // These don't exist-
+	const imageUrl = `${s3Url}${req.file.filename}`;
+	// We are never coming here.
+	// I think I am somehow creating a new row, instad of pasting the url in the corresponding row
+	// To the id. I don't know how to debug it.
+	// It looks like the url of the picture is the user id instead of the URL.
+	db
+		.addProfilePic(req.session.userId, imageUrl)
+		.then(function({ rows }) {
+			console.log('This is supposed to be what we are sending', rows);
+			res.json(rows);
+		})
+		.catch(function(err) {
+			console.log(err);
+			res.sendStatus(500);
+		});
 });
 
 // Fall route, don't delete

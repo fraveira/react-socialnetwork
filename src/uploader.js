@@ -10,10 +10,27 @@ export default class Uploader extends React.Component {
 		console.log('Uploader mounted!!');
 		console.log('this.props: ', this.props);
 	}
+
+	upload() {
+		var fd = new FormData();
+		fd.append('image', this.state.file); // .file doesn't exist.
+		axios.post('/upload', fd).then(function(res) {
+			// No iea what to do here.
+		});
+	}
 	render() {
+		// You have to render the input!!!
 		return (
 			<div>
-				<h3 onClick={() => this.props.methodInApp()}>This is my uploader component</h3>
+				<input
+					type="file"
+					accept="image/*"
+					className="inputfile"
+					onChange={(e) => {
+						this.setState({ file: e.target.files[0] });
+					}}
+				/>
+				<button onClick={() => this.upload()}>Upload picture</button>
 			</div>
 		);
 	}
