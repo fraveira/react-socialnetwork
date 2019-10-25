@@ -10,10 +10,14 @@ module.exports.registeringUsers = (first_name, last_name, email, hash) => {
 	]);
 };
 
-module.exports.retrievingPassword = email => {
-    return db.query(`SELECT password FROM users WHERE email = $1`, [email]);
+module.exports.retrievingPassword = (email) => {
+	return db.query(`SELECT password FROM users WHERE email = $1`, [ email ]);
 };
 
-module.exports.loggedId = email => {
-    return db.query(`SELECT id FROM users WHERE email = $1`, [email]);
+module.exports.loggedId = (email) => {
+	return db.query(`SELECT id FROM users WHERE email = $1`, [ email ]);
+};
+
+module.exports.getUserById = (id) => {
+	return db.query(`SELECT id AS user_id FROM users WHERE id = $1`, [ id ]);
 };

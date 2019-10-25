@@ -5,6 +5,11 @@ const db = require('./db');
 const cookieSession = require('cookie-session');
 const bcrypt = require('./bcrypt');
 const csurf = require('csurf');
+const multer = require('multer');
+const uidSafe = require('uid-safe');
+const path = require('path');
+const s3 = require('./s3');
+const { s3Url } = require('./config');
 
 app.use(compression());
 
@@ -112,6 +117,16 @@ app.post('/login', (req, res) => {
 			console.log('This is catching an error happening in comparing passwords', error);
 			res.json({ success: false });
 		});
+});
+
+app.get('/user', async (req, res) => {
+	try {
+		const { rows } = await db.getUserById(req.session.userId);
+		res.json(rows[0]); // TESTED, this is returning user_id who logged.
+	} catch (err) {
+		console.log(err);
+		res.sendStatus(500);
+	}
 });
 
 // Fall route, don't delete

@@ -2,7 +2,7 @@ import React from 'react';
 
 export function ProfilePic({ firstName, lastName, imgUrl }) {
 	console.log('props in ProfilePic: ', firstName, lastName, imgUrl);
-	imgUrl = imgUrl || '/img/default.png';
+	imgUrl = imgUrl || '/assets/defaultpic.png';
 
 	return (
 		<div>
