@@ -23,7 +23,7 @@ export function ProfilePic({ first, last, profilepicture, toggleModal }) {
 	profilepicture = profilepicture || '/assets/defaultpic.png';
 
 	return (
-		<div style={profilePicContainer}>
+		<div onClick={toggleModal} style={profilePicContainer}>
 			{/* <span>Hi, {first}!</span> */}
 			<img style={profilePicStyles} src={profilepicture} alt={last} />
 		</div>

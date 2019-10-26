@@ -47,8 +47,9 @@ export class App extends React.Component {
 	render() {
 		return (
 			<section>
-				<nav onClick={this.toggleModal} style={navStyles}>
+				<nav style={navStyles}>
 					<ProfilePic
+						toggleModal={() => this.toggleModal()}
 						first={this.state.first}
 						last={this.state.last}
 						profilepicture={this.state.profilepicture}
