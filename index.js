@@ -142,7 +142,6 @@ app.post('/login', (req, res) => {
 app.get('/user', async (req, res) => {
 	try {
 		const { rows } = await db.getUserById(req.session.userId);
-		console.log('This is what we are doing now', rows[0]);
 		res.json(rows[0]); // TESTED, this is returning user_id who logged.
 	} catch (err) {
 		console.log(err);
@@ -157,7 +156,6 @@ app.post('/upload', uploader.single('image'), s3.upload, function(req, res) {
 	db
 		.addProfilePic(req.session.userId, imageUrl)
 		.then(function({ rows }) {
-			console.log('This is supposed to be what we are sending', rows);
 			res.json(rows[0]);
 		})
 		.catch(function(err) {

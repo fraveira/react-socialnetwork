@@ -1,6 +1,22 @@
 import React from 'react';
 import axios from './axios';
 
+const floatingUploader = {
+	position: 'absolute',
+	width: '500px',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -35%)',
+	borderRadius: '12px',
+	backgroundColor: 'white',
+	fontSize: '15px',
+	textAlign: 'left',
+	zIndex: '1',
+	display: 'block',
+	border: '1px solid #ccc',
+	opacity: '1'
+};
+
 export default class Uploader extends React.Component {
 	constructor() {
 		super();
@@ -20,9 +36,9 @@ export default class Uploader extends React.Component {
 		});
 	}
 	render() {
-		// You have to render the input!!!
 		return (
-			<div>
+			<div style={floatingUploader}>
+				<h3 className="insideuploader">Upload your Profile Picture!</h3>
 				<input
 					type="file"
 					accept="image/*"
