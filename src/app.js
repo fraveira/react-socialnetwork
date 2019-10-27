@@ -10,6 +10,11 @@ const navStyles = {
 	marginTop: '0'
 };
 
+// const profile = {
+// 	display: 'flex',
+// 	width: '100%'
+// };
+
 export class App extends React.Component {
 	constructor() {
 		super();
@@ -51,7 +56,7 @@ export class App extends React.Component {
 
 	render() {
 		return (
-			<section>
+			<React.Fragment>
 				<nav style={navStyles}>
 					<ProfilePic
 						toggleModal={() => this.toggleModal()}
@@ -60,17 +65,19 @@ export class App extends React.Component {
 						profilepicture={this.state.profilepicture}
 					/>
 				</nav>
-				<Profile
-					id={this.state.id}
-					first={this.state.first}
-					last={this.state.last}
-					profilepicture={this.state.profilepicture}
-					onClick={this.showUploader}
-					bio={this.state.bio}
-					setBio={this.setBio}
-				/>
-				{this.state.uploaderIsVisible && <Uploader setImage={this.setImage} />}
-			</section>
+				<section>
+					<Profile
+						id={this.state.id}
+						first={this.state.first}
+						last={this.state.last}
+						profilepicture={this.state.profilepicture}
+						onClick={this.showUploader}
+						bio={this.state.bio}
+						setBio={this.setBio}
+					/>
+					{this.state.uploaderIsVisible && <Uploader setImage={this.setImage} />}
+				</section>
+			</React.Fragment>
 		);
 	}
 }

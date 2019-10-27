@@ -8,6 +8,7 @@ body {
 main {
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 }
 
 section {
@@ -32,4 +33,46 @@ nav {
 
 .insideuploader {
 	text-align: center;
+}
+
+.profileStyles {
+	background-color: #b4b4b4;
+	width: 30%;
+	flex-wrap: wrap;
+}
+
+.profileStyles img {
+	height: 300px !important;
+	width: 300px !important;
+	object-fit: cover !important;
+	border-radius: 15px !important;
+	margin-left: 20px !important;
+	margin-top: 3px !important;
+}
+
+.profileStyles div {
+	float: left !important;
+	height: 100% !important;
+	width: 100% !important;
+	margin: 0px !important;
+	background-color: #747474 !important;
+	float: left !important;
+	position: relative !important;
+	border: 0px !important;
+	border-radius: 0px !important;
+}
+
+.bioEdition {
+	background-color: #b4b4b4;
+	width: 70%;
+	flex-wrap: wrap;
+}
+
+.nameInProfile {
+	font-size: 2.5rem;
+}
+
+.helloInProfile {
+	font-size: 3rem;
+	color: #d62502;
 }

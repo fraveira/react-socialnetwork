@@ -146,7 +146,7 @@ app.get('/user', async (req, res) => {
 
 // Upload route:
 
-app.post('/upload', function(req, res) {
+app.post('/upload', uploader.single('image'), s3.upload, function(req, res) {
 	const imageUrl = `${s3Url}${req.file.filename}`;
 	db
 		.addProfilePic(req.session.userId, imageUrl)

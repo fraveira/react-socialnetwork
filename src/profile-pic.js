@@ -11,7 +11,7 @@ const profilePicContainer = {
 	height: '60px',
 	width: '60px',
 	margin: '1px',
-	backgroundColor: 'green',
+	backgroundColor: 'white',
 	float: 'right',
 	position: 'relative',
 	border: 'black solid 1px',
