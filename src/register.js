@@ -29,9 +29,7 @@ export default class Register extends React.Component {
 				password: this.state.password
 			})
 			.then(({ data }) => {
-				console.log('Info importante', data);
 				if (data.success) {
-					console.log('We arrived to data succesful');
 					location.replace('/');
 				} else {
 					this.setState({

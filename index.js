@@ -85,8 +85,6 @@ app.get('/welcome', function(req, res) {
 // Register route.
 
 app.post('/register', (req, res) => {
-	console.log(req.body.email);
-	console.log(req.body.password);
 	let first_name = req.body.first;
 	let last_name = req.body.last;
 	let email = req.body.email;
@@ -111,11 +109,9 @@ app.post('/login', (req, res) => {
 	let email = req.body.email;
 	let submittedPass = req.body.password;
 	let userPassword;
-	console.log('User email', email);
 	db
 		.retrievingPassword(email)
 		.then(({ rows }) => {
-			console.log('Rows are here', rows);
 			userPassword = rows[0].password;
 			return userPassword;
 		})
@@ -124,7 +120,6 @@ app.post('/login', (req, res) => {
 		})
 		.then((areTheSame) => {
 			if (areTheSame) {
-				console.log('Are they the same inside?');
 				db.loggedId(email).then((id) => {
 					req.session.userId = id.rows[0].id;
 					res.json({ success: true });
@@ -151,10 +146,24 @@ app.get('/user', async (req, res) => {
 
 // Upload route:
 
-app.post('/upload', uploader.single('image'), s3.upload, function(req, res) {
+app.post('/upload', function(req, res) {
 	const imageUrl = `${s3Url}${req.file.filename}`;
 	db
 		.addProfilePic(req.session.userId, imageUrl)
+		.then(function({ rows }) {
+			res.json(rows[0]);
+		})
+		.catch(function(err) {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
+
+// Editbio route.
+
+app.post('/editbio', function(req, res) {
+	db
+		.editBio(req.session.userId, req.body.bio) // What id to take, and what value to insert as bio.
 		.then(function({ rows }) {
 			res.json(rows[0]);
 		})

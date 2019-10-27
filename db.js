@@ -28,3 +28,7 @@ module.exports.addProfilePic = (id, profilepicture) => {
 		profilepicture
 	]);
 };
+
+module.exports.editBio = (id, bio) => {
+	return db.query(`UPDATE users SET bio=$2 WHERE id = $1 RETURNING bio`, [ id, bio ]);
+};

@@ -18,13 +18,11 @@ const profilePicContainer = {
 	borderRadius: '15px'
 };
 
-export function ProfilePic({ first, last, profilepicture, toggleModal }) {
-	console.log('props in ProfilePic: ', first, last, profilepicture);
+export default function ProfilePic({ last, profilepicture, toggleModal }) {
 	profilepicture = profilepicture || '/assets/defaultpic.png';
 
 	return (
 		<div onClick={toggleModal} style={profilePicContainer}>
-			{/* <span>Hi, {first}!</span> */}
 			<img style={profilePicStyles} src={profilepicture} alt={last} />
 		</div>
 	);
