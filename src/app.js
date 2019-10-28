@@ -3,17 +3,14 @@ import ProfilePic from './profile-pic';
 import Uploader from './uploader';
 import axios from './axios';
 import Profile from './profile';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { OtherProfile } from './otherprofile';
 
 const navStyles = {
 	backgroundColor: 'white',
 	height: '65px',
 	marginTop: '0'
 };
-
-// const profile = {
-// 	display: 'flex',
-// 	width: '100%'
-// };
 
 export class App extends React.Component {
 	constructor() {
@@ -55,28 +52,43 @@ export class App extends React.Component {
 	methodInApp() {}
 
 	render() {
+		if (!this.state.first) {
+			return null;
+		}
 		return (
 			<React.Fragment>
-				<nav style={navStyles}>
-					<ProfilePic
-						toggleModal={() => this.toggleModal()}
-						first={this.state.first}
-						last={this.state.last}
-						profilepicture={this.state.profilepicture}
-					/>
-				</nav>
-				<section>
-					<Profile
-						id={this.state.id}
-						first={this.state.first}
-						last={this.state.last}
-						profilepicture={this.state.profilepicture}
-						onClick={this.showUploader}
-						bio={this.state.bio}
-						setBio={this.setBio}
-					/>
-					{this.state.uploaderIsVisible && <Uploader setImage={this.setImage} />}
-				</section>
+				<BrowserRouter>
+					<React.Fragment>
+						<nav style={navStyles}>
+							<ProfilePic
+								toggleModal={() => this.toggleModal()}
+								first={this.state.first}
+								last={this.state.last}
+								profilepicture={this.state.profilepicture}
+							/>
+						</nav>
+						<Route
+							path="/"
+							render={(props) => (
+								<section>
+									<Profile
+										id={this.state.id}
+										first={this.state.first}
+										last={this.state.last}
+										profilepicture={this.state.profilepicture}
+										onClick={this.showUploader}
+										bio={this.state.bio}
+										setBio={this.setBio}
+										toggleModal={() => this.toggleModal()}
+									/>
+									{this.state.uploaderIsVisible && <Uploader setImage={this.setImage} />}
+								</section>
+							)}
+						/>
+
+						<Route exact path="/user/:id" component={OtherProfile} />
+					</React.Fragment>
+				</BrowserRouter>
 			</React.Fragment>
 		);
 	}

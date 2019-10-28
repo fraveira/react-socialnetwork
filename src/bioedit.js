@@ -23,6 +23,17 @@ export default class Bioedit extends React.Component {
 			})
 			.catch((err) => console.log(err));
 	}
+
+	deleteBio() {
+		axios
+			.post('/editbio', { bio: this.state.bio })
+			.then((res) => {
+				this.props.setBio('');
+				this.setState({ bioIsOn: false });
+			})
+			.catch((err) => console.log(err));
+	}
+
 	render() {
 		return (
 			<React.Fragment>
@@ -56,8 +67,8 @@ export default class Bioedit extends React.Component {
 						</button>
 						<button
 							onClick={() =>
-								this.editBio({
-									bio: undefined
+								this.deleteBio({
+									bio: ''
 								})}
 						>
 							Delete your Bio!

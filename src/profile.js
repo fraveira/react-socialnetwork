@@ -14,7 +14,7 @@ export default class Profile extends React.Component {
 			<React.Fragment>
 				<div className="profileStyles">
 					<ProfilePic
-						toggleModal={() => this.toggleModal()}
+						toggleModal={() => this.props.toggleModal()}
 						first={this.props.first}
 						last={this.props.last}
 						profilepicture={this.props.profilepicture}
