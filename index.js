@@ -173,6 +173,28 @@ app.post('/editbio', function(req, res) {
 		});
 });
 
+// Other users routes:
+
+app.get('/api/user/:id', async (req, res) => {
+	console.log('This is req.params.id', req.params.id);
+	console.log('This is req.session.userId', req.session.userId);
+	if (Number(req.params.id) == req.session.userId) {
+		res.json({ redirectMe: true }); // Crea un valor que luego llamarás de axios.get para redirigirlos.
+	} else {
+		try {
+			const { rows } = await db.getUserById(req.params.id);
+			if (!rows[0]) {
+				res.json({ redirectMe: true });
+			}
+			console.log('This is the visited link id', req.params.id);
+			res.json(rows[0]);
+		} catch (err) {
+			console.log(err);
+			res.sendStatus(500);
+		}
+	}
+});
+
 // Fall route, don't delete
 app.get('*', function(req, res) {
 	if (!req.session.userId) {

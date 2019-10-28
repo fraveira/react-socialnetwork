@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from './axios';
+import ProfilePic from './profile-pic';
+import Bioedit from './bioedit';
 
 export class OtherProfile extends React.Component {
 	constructor() {
@@ -7,16 +9,37 @@ export class OtherProfile extends React.Component {
 		this.state = {};
 	}
 
-	componentDidMount() {
-		console.log('I am mounting the component');
-		console.log('this.props.match', this.props.match.params.id);
+	async componentDidMount() {
+		axios
+			.get(`/api/user/${this.props.match.params.id}`)
+			.then(({ data }) => {
+				if (data.redirectMe) {
+					this.props.history.push('/');
+				} else {
+					this.setState(data);
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+				this.props.history.push('/');
+			});
 	}
 
 	render() {
 		return (
 			<React.Fragment>
 				<div className="profileStyles">
-					<h1>Hello from other profile!</h1>
+					<ProfilePic
+						first={this.state.first}
+						last={this.state.last}
+						profilepicture={this.state.profilepicture}
+					/>
+				</div>
+				<div className="bioEdition">
+					<h3>
+						{this.state.first} {this.state.first}
+					</h3>
+					<p> {this.state.bio}</p>
 				</div>
 			</React.Fragment>
 		);
