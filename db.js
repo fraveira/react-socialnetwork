@@ -38,5 +38,5 @@ module.exports.getLastThree = () => {
 };
 
 module.exports.getMatchingUsers = (val) => {
-	return db.query(`SELECT id, first, last, profilepicture FROM users WHERE first ILIKE $1`, [ val + '%' ]);
+	return db.query(`SELECT id, first, last, profilepicture FROM users WHERE first ILIKE $1 LIMIT 3`, [ val + '%' ]);
 };

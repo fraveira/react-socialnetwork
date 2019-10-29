@@ -14,23 +14,17 @@ export default function FindPeople() {
 				(async () => {
 					const { data } = await axios.get(`/api/users/`);
 					setPeoples(data);
-					console.log('Is data something?', data);
 				})();
 			} else {
-				console.log('The input is populated!');
+				(async () => {
+					const { data } = await axios.get(`/api/users/${userInput}`);
+					if (!ignore) {
+						setPeoples(data);
+					} else {
+						console.log('Ignored');
+					}
+				})();
 			}
-			// if (userInput !== '') {
-			// 	(async () => {
-			// 		console.log('userInput: ', userInput);
-			// 		const { data } = await axios.get(`/api/users/${userInput}`);
-			// 		if (!ignore) {
-			// 			setPeoples(data);
-			// 			console.log('Is data something?', data);
-			// 		} else {
-			// 			console.log('Ignored');
-			// 		}
-			// 	})();
-			// }
 			return () => {
 				ignore = true;
 			};

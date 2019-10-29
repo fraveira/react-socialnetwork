@@ -198,7 +198,6 @@ app.get('/api/user/:id', async (req, res) => {
 app.get('/api/users', async (req, res) => {
 	try {
 		const { rows } = await db.getLastThree();
-		console.log('rows is', rows);
 		res.json(rows);
 	} catch (err) {
 		console.log(err);
@@ -208,8 +207,7 @@ app.get('/api/users', async (req, res) => {
 
 app.get('/api/users/:query', async (req, res) => {
 	try {
-		const { rows } = await db.getMatchingUsers(query);
-		console.log('rows is', rows);
+		const { rows } = await db.getMatchingUsers(req.params.query);
 		res.json(rows);
 	} catch (err) {
 		console.log(err);
