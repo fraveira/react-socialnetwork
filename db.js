@@ -32,3 +32,11 @@ module.exports.addProfilePic = (id, profilepicture) => {
 module.exports.editBio = (id, bio) => {
 	return db.query(`UPDATE users SET bio=$2 WHERE id = $1 RETURNING bio`, [ id, bio ]);
 };
+
+module.exports.getLastThree = () => {
+	return db.query(`SELECT id, first, last, profilepicture FROM users ORDER BY id DESC LIMIT 3`);
+};
+
+module.exports.getMatchingUsers = (val) => {
+	return db.query(`SELECT id, first, last, profilepicture FROM users WHERE first ILIKE $1`, [ val + '%' ]);
+};

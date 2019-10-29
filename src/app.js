@@ -5,6 +5,7 @@ import axios from './axios';
 import Profile from './profile';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { OtherProfile } from './otherprofile';
+import FindPeople from './findpeople';
 
 const navStyles = {
 	backgroundColor: 'white',
@@ -91,6 +92,12 @@ export class App extends React.Component {
 							path="/user/:id"
 							render={(props) => (
 								<OtherProfile key={props.match.url} match={props.match} history={props.history} />
+							)}
+						/>
+						<Route
+							path="/users"
+							render={(props) => (
+								<FindPeople key={props.match.url} match={props.match} history={props.history} />
 							)}
 						/>
 					</React.Fragment>
