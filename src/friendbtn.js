@@ -13,9 +13,9 @@ export default function FriendButton({ visitedId }) {
 				// No data no friends!
 				console.log('We are not getting any data');
 				setRelation('Add as a friend');
-			} else if (conditioncomeshere) {
-				console.log('What is data returning?', data.accepted);
-				console.log('What is accepted returning?', data.accepted);
+			} else if (data.accepted == false) {
+				console.log("They didn't accept the request");
+				console.log('Is data returning only one row?', data);
 				console.log("Following requests are to be done when some data is returned. Now it's the case.");
 				// CHECK NOW IF THERE IS DATA, AND IF THE REQUEST IS NOT ACCEPTED.
 				// Else if accepted is FALSE.
@@ -23,6 +23,7 @@ export default function FriendButton({ visitedId }) {
 				// Relation always is returned depending on the database (coming from axios.get)
 				// But naturalmente the function we execute is different depending on the status.
 				// let's focus on the setRelation function.
+				setRelation('Cancel the request');
 			} else {
 				console.log('Accepted is true');
 				// Else if acccepted is TRUE
@@ -39,8 +40,7 @@ export default function FriendButton({ visitedId }) {
 	function handleRelation() {
 		(async () => {
 			const { data } = await axios.post(`/sending-request/${visitedId}`);
-			// Set the text to "Cancel frienship"
-			setRelation('Add as a friend');
+			setRelation('Cancel Friendship');
 		})();
 	}
 
