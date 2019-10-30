@@ -217,13 +217,25 @@ app.get('/api/users/:query', async (req, res) => {
 // Friend Buttons and Relationship routes.
 
 app.get('/get-initial-status/:id', async (req, res) => {
-	console.log('Req.params.id', Number(req.params.id));
-	console.log('Scaramouch fandango', req.session.userId);
-	const visitedUrl = Number(req.params.id);
+	const operans = Number(req.params.id);
 	try {
-		const { rows } = await db.getRelationship(visitedUrl, req.session.userId);
+		const { rows } = await db.getRelationship(operans, req.session.userId);
 		console.log('Rows empty', rows[0]);
 		res.json(rows[0]);
+	} catch (err) {
+		console.log(err);
+		res.sendStatus(500);
+	}
+});
+
+app.post('/sending-request/:id', async (req, res) => {
+	const operans = Number(req.params.id);
+	const operator = req.session.userId;
+	try {
+		const { rows } = await db.addAsFriend(operans, operator);
+		res.json(rows[0]);
+		// We are only interested in a piece of this response.
+		console.log('What piece of response do we want?', rows[0]);
 	} catch (err) {
 		console.log(err);
 		res.sendStatus(500);

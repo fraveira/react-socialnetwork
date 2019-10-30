@@ -50,3 +50,11 @@ module.exports.getRelationship = (receiver_id, sender_id) => {
 		[ receiver_id, sender_id ]
 	);
 };
+
+// Don't touch "accepted" boolean yet.
+module.exports.addAsFriend = (operans, operator) => {
+	return db.query(`INSERT INTO friendships (receiver_id, sender_id) values ($1, $2) RETURNING id;`, [
+		operans,
+		operator
+	]);
+};
