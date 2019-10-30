@@ -184,7 +184,6 @@ app.get('/api/user/:id', async (req, res) => {
 			if (!rows[0]) {
 				res.json({ redirectMe: true });
 			}
-			console.log('This is the visited link id', req.params.id);
 			res.json(rows[0]);
 		} catch (err) {
 			console.log(err);
@@ -209,6 +208,22 @@ app.get('/api/users/:query', async (req, res) => {
 	try {
 		const { rows } = await db.getMatchingUsers(req.params.query);
 		res.json(rows);
+	} catch (err) {
+		console.log(err);
+		res.sendStatus(500);
+	}
+});
+
+// Friend Buttons and Relationship routes.
+
+app.get('/get-initial-status/:id', async (req, res) => {
+	console.log('Req.params.id', Number(req.params.id));
+	console.log('Scaramouch fandango', req.session.userId);
+	const visitedUrl = Number(req.params.id);
+	try {
+		const { rows } = await db.getRelationship(visitedUrl, req.session.userId);
+		console.log('Rows empty', rows[0]);
+		res.json(rows[0]);
 	} catch (err) {
 		console.log(err);
 		res.sendStatus(500);

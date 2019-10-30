@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from './axios';
 import ProfilePic from './profile-pic';
-import Bioedit from './bioedit';
+import FriendButton from './friendbtn';
 
 export class OtherProfile extends React.Component {
 	constructor() {
@@ -34,6 +34,7 @@ export class OtherProfile extends React.Component {
 						last={this.state.last}
 						profilepicture={this.state.profilepicture}
 					/>
+					<FriendButton visitedId={this.props.match.params.id} />
 				</div>
 				<div className="bioEdition">
 					<h3>

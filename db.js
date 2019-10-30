@@ -40,3 +40,13 @@ module.exports.getLastThree = () => {
 module.exports.getMatchingUsers = (val) => {
 	return db.query(`SELECT id, first, last, profilepicture FROM users WHERE first ILIKE $1 LIMIT 3`, [ val + '%' ]);
 };
+
+module.exports.getRelationship = (receiver_id, sender_id) => {
+	return db.query(
+		`SELECT * FROM friendships 
+    WHERE (receiver_id = $1 AND sender_id = $2)
+    OR (receiver_id = $2 AND sender_id = $1)
+  `,
+		[ receiver_id, sender_id ]
+	);
+};

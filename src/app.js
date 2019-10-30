@@ -6,6 +6,7 @@ import Profile from './profile';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { OtherProfile } from './otherprofile';
 import FindPeople from './findpeople';
+import FriendButton from './friendbtn';
 
 const navStyles = {
 	backgroundColor: 'white',
