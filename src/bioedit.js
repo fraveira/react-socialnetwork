@@ -12,6 +12,9 @@ export default class Bioedit extends React.Component {
 
     componentDidMount() {
         console.log("Bio mounted!");
+        this.setState({
+            bio: this.state.bio
+        })
     }
 
     editBio() {
