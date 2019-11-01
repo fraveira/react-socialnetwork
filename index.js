@@ -263,6 +263,19 @@ app.post('/ending-friendship/:id', async (req, res) => {
 	}
 });
 
+// Friends wannabes route:
+
+app.get('/friends-wannabes/', async (req, res) => {
+	const operator = req.session.userId;
+	try {
+		const { rows } = await db.getWannabes(operator);
+		res.json(rows[0]);
+	} catch (err) {
+		console.log(err);
+		res.sendStatus(500);
+	}
+});
+
 // Fall route, don't delete
 app.get('*', function(req, res) {
 	if (!req.session.userId) {
