@@ -5,7 +5,7 @@ export function reducer(state = {}, action) {
 			users: action.users
 		};
 	}
-	if (action.type == 'MAKE_FRIENDS' || action.type == 'MAKE_NOT') {
+	if (action.type == 'MAKE_FRIENDS') {
 		state = {
 			...state,
 			users: state.users.map((user) => {
@@ -18,6 +18,14 @@ export function reducer(state = {}, action) {
 					return user;
 				}
 			})
+		};
+	}
+	// Separating make friends from unfriend might solve the bug.
+
+	if (action.type == 'MAKE_NOT') {
+		state = {
+			...state,
+			users: state.users.filter((user) => user.id != action.id)
 		};
 	}
 	return state;

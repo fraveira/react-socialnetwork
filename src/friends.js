@@ -5,13 +5,14 @@ import { receiveFriendsWannabes, acceptFriendRequest, unFriend } from './actions
 
 export default function Friends() {
 	const dispatch = useDispatch();
-	const friends = useSelector((state) => state.users && state.users.filter((user) => user.accepted == true));
-	const wannabes = useSelector((state) => state.users && state.users.filter((user) => user.accepted == false));
+	const users = useSelector((state) => state.users);
+	const friends = useSelector((state) => state.users && state.users.filter((user) => user.accepted));
+	const wannabes = useSelector((state) => state.users && state.users.filter((user) => user.accepted === false));
 	useEffect(() => {
 		dispatch(receiveFriendsWannabes());
 	}, []);
 
-	if (!friends) {
+	if (!users) {
 		return null;
 	}
 
