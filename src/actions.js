@@ -9,7 +9,7 @@ export async function receiveFriendsWannabes() {
 }
 
 export async function acceptFriendRequest(id) {
-	await axios.post(`/accepting-friendship/${id}`);
+	await axios.post(`/accepting-request/${id}`);
 	return {
 		type: 'MAKE_FRIENDS',
 		id
