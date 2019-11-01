@@ -72,7 +72,7 @@ module.exports.endFriendship = (operans, operator) => {
 
 module.exports.getWannabes = (id) => {
 	return db.query(
-		`SELECT users.id, first, last, image, accepted
+		`SELECT users.id, first, last, profilepicture, accepted
         FROM friendships
         JOIN users
         ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
