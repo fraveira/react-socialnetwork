@@ -20,7 +20,7 @@ if (!userIsLoggedIn) {
 } else {
 	elem = (
 		<Provider store={store}>
-			<App />;
+			<App />
 		</Provider>
 	);
 }

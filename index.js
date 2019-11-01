@@ -269,7 +269,7 @@ app.get('/friends-wannabes/', async (req, res) => {
 	const operator = req.session.userId;
 	try {
 		const { rows } = await db.getWannabes(operator);
-		res.json(rows[0]);
+		res.json(rows);
 	} catch (err) {
 		console.log(err);
 		res.sendStatus(500);
