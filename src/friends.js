@@ -3,6 +3,21 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { receiveFriendsWannabes, acceptFriendRequest, unFriend } from './actions';
 
+const friends_hrs = {
+	width: '50%'
+};
+
+const friends_lis = {
+	listStyleType: 'none'
+};
+
+const friends_img = {
+	height: '180px',
+	width: '180px',
+	objectFit: 'cover',
+	borderRadius: '15px'
+};
+
 export default function Friends() {
 	const dispatch = useDispatch();
 	const users = useSelector((state) => state.users);
@@ -18,34 +33,48 @@ export default function Friends() {
 
 	return (
 		<React.Fragment>
-			<div className="yesfriends">
-				<ul>
-					{friends.map((user) => (
-						<li key={user.first}>
-							{user.first}
-							{user.last}
-							<img src={user.profilepicture} />
-							<button className="deletebtn" onClick={(e) => dispatch(unFriend(user.id))}>
-								Unfriend
-							</button>
-						</li>
-					))}
-				</ul>
-			</div>
-			<div className="wannabes">
-				<ul>
-					{wannabes.map((user) => (
-						<li key={user.first}>
-							{user.first}
-							{user.last}
-							<img src={user.profilepicture} />
-							<button className="submitbtn" onClick={(e) => dispatch(acceptFriendRequest(user.id))}>
-								Accept friend
-							</button>
-						</li>
-					))}
-				</ul>
-			</div>
+			<section>
+				<div className="yesfriends">
+					<h2>These are your friends!</h2>
+					<ul>
+						{friends.map((user) => (
+							<li style={friends_lis} key={user.first}>
+								<h3>
+									{user.first}
+									{user.last}
+								</h3>
+								<a href={'/user/' + user.id}>
+									<img style={friends_img} src={user.profilepicture} />
+								</a>
+								<button className="deletebtn" onClick={(e) => dispatch(unFriend(user.id))}>
+									Unfriend
+								</button>
+								<hr style={friends_hrs} />
+							</li>
+						))}
+					</ul>
+				</div>
+				<div className="wannabes">
+					<h2>They want to be your friends!</h2>
+					<ul>
+						{wannabes.map((user) => (
+							<li style={friends_lis} key={user.first}>
+								<h3>
+									{user.first}
+									{user.last}
+								</h3>
+								<a href={'/user/' + user.id}>
+									<img style={friends_img} src={user.profilepicture} />
+								</a>
+								<button className="submitbtn" onClick={(e) => dispatch(acceptFriendRequest(user.id))}>
+									Accept friend
+								</button>
+								<hr style={friends_hrs} />
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
 		</React.Fragment>
 	);
 }

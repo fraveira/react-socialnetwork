@@ -64,10 +64,15 @@ export class App extends React.Component {
 				<BrowserRouter>
 					<React.Fragment>
 						<nav style={navStyles}>
-							<img src="/assets/logo.png" />
+							<a href="/">
+								<img src="/assets/logo.png" />
+							</a>
 							<div className="navbtn">
 								<span>
-									<a href="/friends">Friends</a>
+									<a href="/users">Search Users</a>
+								</span>
+								<span>
+									<a href="/friends">Friends List</a>
 								</span>
 								<span>
 									<a href="/logout">Logout</a>

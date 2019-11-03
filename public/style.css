@@ -186,3 +186,27 @@ button.deletebtn:active {
 .navbtn span {
 	margin-left: 30px;
 }
+
+.yesfriends {
+	width: 50%;
+	flex-wrap: wrap;
+	text-align: center;
+}
+
+.wannabes {
+	width: 50%;
+	flex-wrap: wrap;
+	text-align: center;
+}
+
+.yesfriends button {
+	width: 20%;
+}
+
+.wannabes button {
+	width: 20%;
+}
+
+h2 {
+	width: 106%;
+}
