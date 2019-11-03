@@ -12,7 +12,8 @@ import Friends from './friends';
 const navStyles = {
 	backgroundColor: 'white',
 	height: '65px',
-	marginTop: '0'
+	marginTop: '0',
+	display: 'inline-block'
 };
 
 export class App extends React.Component {
@@ -63,6 +64,16 @@ export class App extends React.Component {
 				<BrowserRouter>
 					<React.Fragment>
 						<nav style={navStyles}>
+							<img src="/assets/logo.png" />
+							<div className="navbtn">
+								<span>
+									<a href="/friends">Friends</a>
+								</span>
+								<span>
+									<a href="/logout">Logout</a>
+								</span>
+							</div>
+
 							<ProfilePic
 								toggleModal={() => this.toggleModal()}
 								first={this.state.first}

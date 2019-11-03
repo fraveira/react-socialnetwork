@@ -276,6 +276,13 @@ app.get('/friends-wannabes/', async (req, res) => {
 	}
 });
 
+// Logout route:
+
+app.get('/logout', function(req, res) {
+	req.session = null;
+	res.redirect('/register');
+});
+
 // Fall route, don't delete
 app.get('*', function(req, res) {
 	if (!req.session.userId) {
