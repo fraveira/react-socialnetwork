@@ -48,7 +48,7 @@ export default function FriendButton({ visitedId }) {
 
 	return (
 		<div>
-			<button onClick={() => handleRelation()} type="button">
+			<button className="submitbtn" onClick={() => handleRelation()} type="button">
 				{' '}
 				{relation}
 			</button>

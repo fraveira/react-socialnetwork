@@ -25,7 +25,9 @@ export default function Friends() {
 							{user.first}
 							{user.last}
 							<img src={user.profilepicture} />
-							<button onClick={(e) => dispatch(unFriend(user.id))}>Unfriend</button>
+							<button className="deletebtn" onClick={(e) => dispatch(unFriend(user.id))}>
+								Unfriend
+							</button>
 						</li>
 					))}
 				</ul>
@@ -37,7 +39,9 @@ export default function Friends() {
 							{user.first}
 							{user.last}
 							<img src={user.profilepicture} />
-							<button onClick={(e) => dispatch(acceptFriendRequest(user.id))}>Accept friend</button>
+							<button className="submitbtn" onClick={(e) => dispatch(acceptFriendRequest(user.id))}>
+								Accept friend
+							</button>
 						</li>
 					))}
 				</ul>
