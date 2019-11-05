@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { socket } from './socket';
 
-export function Chat() {
+export default function Chat() {
 	const chatMessages = useSelector((state) => state && state.chatMessages);
 	const elemRef = useRef();
 
@@ -28,6 +28,11 @@ export function Chat() {
 		<div className="chat">
 			<h1>Chat Room</h1>
 			<div className="chat-container" ref={elemRef}>
+				<p>Chat message will go here</p>
+				<p>Chat message will go here</p>
+				<p>Chat message will go here</p>
+				<p>Chat message will go here</p>
+				<p>Chat message will go here</p>
 				<p>Chat message will go here</p>
 				<p>Chat message will go here</p>
 				<p>Chat message will go here</p>

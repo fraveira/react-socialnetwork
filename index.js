@@ -312,9 +312,9 @@ io.on('connection', function(socket) {
 	const userId = socket.request.session.userId;
 
 	/* we want to get the last 10 chat messages */
-	db.getLastTenChatMessages().then((data) => {
-		//  io.sockets.emit('chatMessages', data.rows)
-	});
+	// db.getLastTenChatMessages().then((data) => {
+	// 	//  io.sockets.emit('chatMessages', data.rows)
+	// });
 
 	socket.on('My amazing chat message', function(msg) {
 		console.log('My amazing chat message: ', msg);

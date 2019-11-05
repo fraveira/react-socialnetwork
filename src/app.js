@@ -8,6 +8,7 @@ import { OtherProfile } from './otherprofile';
 import FindPeople from './findpeople';
 import FriendButton from './friendbtn';
 import Friends from './friends';
+import Chat from './chat';
 
 const navStyles = {
 	backgroundColor: 'white',
@@ -124,7 +125,12 @@ export class App extends React.Component {
 								<Friends key={props.match.url} match={props.match} history={props.history} />
 							)}
 						/>
-						<Route path="/chat" component={ChatHooks} />
+						<Route
+							path="/chat"
+							render={(props) => (
+								<Chat key={props.match.url} match={props.match} history={props.history} />
+							)}
+						/>
 					</React.Fragment>
 				</BrowserRouter>
 			</React.Fragment>
