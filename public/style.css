@@ -210,3 +210,8 @@ button.deletebtn:active {
 h2 {
 	width: 106%;
 }
+
+.chat-container {
+	height: 300px;
+	overflow-y: scroll;
+}

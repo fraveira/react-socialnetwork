@@ -10,6 +10,8 @@ const uidSafe = require('uid-safe');
 const path = require('path');
 const s3 = require('./s3');
 const { s3Url } = require('./config');
+const server = require('http').Server(app);
+const io = require('socket.io')(server, { origins: 'localhost:8080 ' });
 
 app.use(compression());
 
@@ -41,12 +43,15 @@ const uploader = multer({
 
 // Middleware
 
-app.use(
-	cookieSession({
-		secret: `I'm always happy.`,
-		maxAge: 1000 * 60 * 60 * 24 * 14
-	})
-);
+const cookieSessionMiddleware = cookieSession({
+	secret: `I'm always angry.`,
+	maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+	cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(csurf());
 
@@ -292,6 +297,34 @@ app.get('*', function(req, res) {
 	}
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
 	console.log("I'm listening.");
+});
+
+// SERVER SIDE SOCKET CODE:
+
+io.on('connection', function(socket) {
+	console.log(`socket with the id ${socket.id} is connected NOW`);
+	if (!socket.request.session.userId) {
+		return socket.disconnect(true);
+	}
+
+	const userId = socket.request.session.userId;
+
+	/* we want to get the last 10 chat messages */
+	db.getLastTenChatMessages().then((data) => {
+		//  io.sockets.emit('chatMessages', data.rows)
+	});
+
+	socket.on('My amazing chat message', function(msg) {
+		console.log('My amazing chat message: ', msg);
+		io.sockets.emit('new chat message from server', msg);
+	});
+
+	socket.on('newMessage', function(newMessage) {
+		// Do stuff here
+		// We want to find out info about the user who sent the message.
+		// We want to emit this message OBJECT
+		// We also want to store it in the DB.
+	});
 });

@@ -124,6 +124,7 @@ export class App extends React.Component {
 								<Friends key={props.match.url} match={props.match} history={props.history} />
 							)}
 						/>
+						<Route path="/chat" component={ChatHooks} />
 					</React.Fragment>
 				</BrowserRouter>
 			</React.Fragment>
