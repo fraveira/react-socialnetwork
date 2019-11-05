@@ -313,9 +313,10 @@ io.on('connection', function(socket) {
 
 	// /* we want to get the last 10 chat messages */
 
-	//  db.getLastTenChatMessages().then((data) => {
-	//  	//  io.sockets.emit('chatMessages', data.rows)
-	//  });
+	db.getLastTenChatMessages().then((data) => {
+		//  io.sockets.emit('chatMessages', data.rows)
+		console.log('This is the info of the last 10 messages', data);
+	});
 
 	socket.on('My amazing chat message', function(newMessage) {
 		console.log('My amazing chat NEW message: ', newMessage);

@@ -85,11 +85,12 @@ module.exports.getWannabes = (id) => {
 module.exports.postNewMessage = (message, user) => {
 	return db.query(`INSERT INTO messages (message, talker) values ($1, $2) RETURNING *;`, [ message, user ]);
 };
+
 module.exports.getLastTenChatMessages = () => {
-	return db.query(`SELECT users.id, first, last, profilepicture, accepted
-        FROM friendships
+	return db.query(`SELECT messages.id, message, first, last, profilepicture, messages.created_at
+        FROM messages
         JOIN users
-        ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
-        OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
-        OR (accepted = true AND sender_id = $1 AND receiver_id = users.id);`);
+        ON (users.id = messages.talker)
+        ORDER BY id DESC
+        LIMIT 10;`);
 };
