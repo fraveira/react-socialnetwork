@@ -311,20 +311,23 @@ io.on('connection', function(socket) {
 
 	const userId = socket.request.session.userId;
 
-	/* we want to get the last 10 chat messages */
-	// db.getLastTenChatMessages().then((data) => {
-	// 	//  io.sockets.emit('chatMessages', data.rows)
-	// });
+	// /* we want to get the last 10 chat messages */
 
-	socket.on('My amazing chat message', function(msg) {
-		console.log('My amazing chat message: ', msg);
-		io.sockets.emit('new chat message from server', msg);
-	});
+	//  db.getLastTenChatMessages().then((data) => {
+	//  	//  io.sockets.emit('chatMessages', data.rows)
+	//  });
 
-	socket.on('newMessage', function(newMessage) {
-		// Do stuff here
-		// We want to find out info about the user who sent the message.
-		// We want to emit this message OBJECT
-		// We also want to store it in the DB.
+	socket.on('My amazing chat message', function(newMessage) {
+		console.log('My amazing chat NEW message: ', newMessage);
+		io.sockets.emit('New chat message from server', newMessage);
+		db
+			.postNewMessage(newMessage, userId)
+			.then(function({ rows }) {
+				res.json({ postsuccess: true });
+			})
+			.catch(function(err) {
+				console.log(err);
+				res.sendStatus(500);
+			});
 	});
 });

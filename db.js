@@ -81,3 +81,15 @@ module.exports.getWannabes = (id) => {
 		[ id ]
 	);
 };
+
+module.exports.postNewMessage = (message, user) => {
+	return db.query(`INSERT INTO messages (message, talker) values ($1, $2) RETURNING *;`, [ message, user ]);
+};
+module.exports.getLastTenChatMessages = () => {
+	return db.query(`SELECT users.id, first, last, profilepicture, accepted
+        FROM friendships
+        JOIN users
+        ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND sender_id = $1 AND receiver_id = users.id);`);
+};
