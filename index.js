@@ -314,17 +314,18 @@ io.on('connection', function(socket) {
 	// /* we want to get the last 10 chat messages */
 
 	db.getLastTenChatMessages().then((data) => {
-		//  io.sockets.emit('chatMessages', data.rows)
+		io.sockets.emit('chatMessages', data.rows);
 		console.log('This is the info of the last 10 messages', data);
 	});
 
 	socket.on('My amazing chat message', function(newMessage) {
 		console.log('My amazing chat NEW message: ', newMessage);
-		io.sockets.emit('New chat message from server', newMessage);
+		io.sockets.emit('chatMessage', newMessage);
 		db
 			.postNewMessage(newMessage, userId)
 			.then(function({ rows }) {
-				res.json({ postsuccess: true });
+				// res.json({ postsuccess: true });
+				console.log('The rows from the socket', rows);
 			})
 			.catch(function(err) {
 				console.log(err);
