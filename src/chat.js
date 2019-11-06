@@ -3,16 +3,22 @@ import { useSelector } from 'react-redux';
 import { socket } from './socket';
 
 export default function Chat() {
-	const chatMessages = useSelector((state) => state && state.chatMessages);
+	const chatMessages = useSelector((state) => state && state.messages);
 	const elemRef = useRef();
 
-	useEffect(() => {
-		console.log('Chat mounted');
-		console.log('Scroll top: ', elemRef.current.scrollTop);
-		console.log('Scroll height: ', elemRef.current.scrollHeight);
-		console.log('Client height: ', elemRef.current.clientHeight);
-		elemRef.current.scrollTop = elemRef.current.scrollHeight - elemRef.current.clientHeight;
-	}, []);
+	useEffect(
+		() => {
+			if (!elemRef) {
+				return null;
+			}
+			console.log('Chat mounted');
+			console.log('Scroll top: ', elemRef.current.scrollTop);
+			console.log('Scroll height: ', elemRef.current.scrollHeight);
+			console.log('Client height: ', elemRef.current.clientHeight);
+			elemRef.current.scrollTop = elemRef.current.scrollHeight - elemRef.current.clientHeight;
+		},
+		[ chatMessages ]
+	);
 
 	const keyCheck = (e) => {
 		if (e.key === 'Enter') {
@@ -23,21 +29,17 @@ export default function Chat() {
 			e.target.value = '';
 		}
 	};
-	console.log('Here are the last 10 chat messages', chatMessages);
 	return (
 		<div className="chat">
 			<h1>Chat Room</h1>
 			<div className="chat-container" ref={elemRef}>
-				<p>Chat message will go here</p>
-				<p>Chat message will go here</p>
-				<p>Chat message will go here</p>
-				<p>Chat message will go here</p>
-				<p>Chat message will go here</p>
-				<p>Chat message will go here</p>
-				<p>Chat message will go here</p>
-				<p>Chat message will go here</p>
-				<p>Chat message will go here</p>
-				<p>Chat message will go here</p>
+				{chatMessages &&
+					chatMessages.map((msg, chat_id) => (
+						<div key={chat_id}>
+							{' '}
+							<p>{msg.message}</p>
+						</div>
+					))}
 			</div>
 			<textarea placeholder="Add your chat message here" onKeyDown={keyCheck} />
 		</div>

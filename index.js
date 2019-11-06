@@ -311,21 +311,19 @@ io.on('connection', function(socket) {
 
 	const userId = socket.request.session.userId;
 
-	// /* we want to get the last 10 chat messages */
-
 	db.getLastTenChatMessages().then((data) => {
 		io.sockets.emit('chatMessages', data.rows);
-		console.log('This is the info of the last 10 messages', data);
 	});
 
 	socket.on('My amazing chat message', function(newMessage) {
 		console.log('My amazing chat NEW message: ', newMessage);
-		io.sockets.emit('chatMessage', newMessage);
 		db
 			.postNewMessage(newMessage, userId)
-			.then(function({ rows }) {
-				// res.json({ postsuccess: true });
-				console.log('The rows from the socket', rows);
+			.then(() => {
+				db.getLastMessage(userId).then(({ rows }) => {
+					console.log('The rows from the socket', rows);
+					io.sockets.emit('chatMessage', rows);
+				});
 			})
 			.catch(function(err) {
 				console.log(err);

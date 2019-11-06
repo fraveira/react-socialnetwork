@@ -76,6 +76,9 @@ export class App extends React.Component {
 									<a href="/friends">Friends List</a>
 								</span>
 								<span>
+									<a href="/chat">Chat</a>
+								</span>
+								<span>
 									<a href="/logout">Logout</a>
 								</span>
 							</div>

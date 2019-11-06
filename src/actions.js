@@ -26,7 +26,7 @@ export async function unFriend(id) {
 
 export async function chatMessage(newMessage) {
 	return {
-		type: 'POST_CHAT',
+		type: 'ADD_CHAT',
 		message: newMessage
 	};
 }

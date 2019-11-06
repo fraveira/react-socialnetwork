@@ -87,10 +87,22 @@ module.exports.postNewMessage = (message, user) => {
 };
 
 module.exports.getLastTenChatMessages = () => {
-	return db.query(`SELECT messages.id, message, first, last, profilepicture, messages.created_at
+	return db.query(`SELECT messages.id AS chat_id, message, first, last, profilepicture, messages.created_at
         FROM messages
         JOIN users
         ON (users.id = messages.talker)
         ORDER BY id DESC
         LIMIT 10;`);
+};
+
+module.exports.getLastMessage = (id) => {
+	return db.query(
+		`SELECT messages.id AS chat_id, message, first, last, profilepicture, messages.created_at
+    FROM messages
+    JOIN users
+    ON (talker=$1 AND users.id = messages.talker)
+    ORDER BY messages.id DESC
+    LIMIT 1;`,
+		[ id ]
+	);
 };
