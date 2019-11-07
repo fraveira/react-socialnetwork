@@ -258,3 +258,8 @@ h2 {
 .chatText {
 	font-size: 0.8rem;
 }
+
+.friendsOf {
+	flex-grow: 1;
+	width: 100%;
+}

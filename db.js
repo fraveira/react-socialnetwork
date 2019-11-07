@@ -106,3 +106,14 @@ module.exports.getLastMessage = (id) => {
 		[ id ]
 	);
 };
+
+module.exports.getFriendsOf = (visitedId) => {
+	return db.query(
+		`SELECT users.id, first, last, profilepicture, accepted
+        FROM friendships
+        JOIN users 
+        ON (sender_id=$1 AND receiver_id = users.id AND accepted = true)
+        OR (receiver_id=$1 AND sender_id = users.id AND accepted = true)`,
+		[ visitedId ]
+	);
+};

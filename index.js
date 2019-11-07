@@ -281,6 +281,20 @@ app.get('/friends-wannabes/', async (req, res) => {
 	}
 });
 
+// Friends of friends.
+
+app.get('/api/friendsof/:id', async (req, res) => {
+	const myFriend = Number(req.params.id);
+	console.log('Getting here, friendsof get route');
+	try {
+		const { rows } = await db.getFriendsOf(myFriend);
+		res.json(rows);
+	} catch (err) {
+		console.log(err);
+		res.sendStatus(500);
+	}
+});
+
 // Logout route:
 
 app.get('/logout', function(req, res) {
