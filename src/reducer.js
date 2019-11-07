@@ -28,27 +28,18 @@ export function reducer(state = {}, action) {
 		};
 	}
 
-	// Show this in reverse order.
-
 	if (action.type == 'GET_CHATS') {
-		console.log('This is get action', action.messages);
 		state = {
 			...state,
 			messages: action.messages.reverse()
 		};
 	}
 
-	// Take a copy of all the chats, take the current string of chats.
-	// Then add the new chat that was posted, and add it at the end of the array.
-
 	if (action.type == 'ADD_CHAT') {
 		state = {
 			...state,
 			messages: state.messages.concat(action.message)
 		};
-
-		console.log('What is action.message in POST_CHAT?', action.message);
-		console.log('What is message in POST_CHAT?', state.messages);
 	}
 	return state;
 }

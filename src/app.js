@@ -17,6 +17,11 @@ const navStyles = {
 	display: 'inline-block'
 };
 
+const logoMainStyle = {
+	maxHeight: '90%',
+	marginTop: '5px'
+};
+
 export class App extends React.Component {
 	constructor() {
 		super();
@@ -66,7 +71,7 @@ export class App extends React.Component {
 					<React.Fragment>
 						<nav style={navStyles}>
 							<a href="/">
-								<img src="/assets/logo.png" />
+								<img style={logoMainStyle} src="/assets/logo.png" />
 							</a>
 							<div className="navbtn">
 								<span>

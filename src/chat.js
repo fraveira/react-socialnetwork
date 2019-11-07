@@ -12,9 +12,6 @@ export default function Chat() {
 				return null;
 			}
 			console.log('Chat mounted');
-			console.log('Scroll top: ', elemRef.current.scrollTop);
-			console.log('Scroll height: ', elemRef.current.scrollHeight);
-			console.log('Client height: ', elemRef.current.clientHeight);
 			elemRef.current.scrollTop = elemRef.current.scrollHeight - elemRef.current.clientHeight;
 		},
 		[ chatMessages ]
@@ -23,8 +20,6 @@ export default function Chat() {
 	const keyCheck = (e) => {
 		if (e.key === 'Enter') {
 			e.preventDefault();
-			console.log(e.target.value);
-			console.log(e.key);
 			socket.emit('My amazing chat message', e.target.value);
 			e.target.value = '';
 		}
@@ -35,13 +30,16 @@ export default function Chat() {
 			<div className="chat-container" ref={elemRef}>
 				{chatMessages &&
 					chatMessages.map((msg, chat_id) => (
-						<div key={chat_id}>
-							{' '}
-							<p>{msg.message}</p>
+						<div className="chatMsg" key={chat_id}>
+							<img id="imgChat" src={msg.profilepicture} />
+							<h5>
+								{msg.first} {msg.last} {msg.created_at}
+							</h5>
+							<p className="chatText">{msg.message}</p>
 						</div>
 					))}
 			</div>
-			<textarea placeholder="Add your chat message here" onKeyDown={keyCheck} />
+			<textarea className="text-to-chat" placeholder="Add your chat message here" onKeyDown={keyCheck} />
 		</div>
 	);
 }

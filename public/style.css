@@ -1,5 +1,5 @@
 body {
-	background-color: blueviolet;
+	background-image: linear-gradient(89.7deg, rgba(43, 104, 167, 1) 20.9%, rgba(156, 213, 194, 1) 77.6%);
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
 		"Helvetica Neue", sans-serif;
@@ -9,6 +9,7 @@ main {
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
+	width: 100%;
 }
 
 section {
@@ -36,7 +37,7 @@ nav {
 }
 
 .profileStyles {
-	background-color: #b4b4b4;
+	background-image: linear-gradient(89.7deg, rgba(43, 104, 167, 1) 20.9%, rgba(156, 213, 194, 1) 77.6%);
 	width: 30%;
 	flex-wrap: wrap;
 }
@@ -65,7 +66,7 @@ nav {
 }
 
 .bioEdition {
-	background-color: #b4b4b4;
+	background-image: linear-gradient(89.7deg, rgba(43, 104, 167, 1) 20.9%, rgba(156, 213, 194, 1) 77.6%);
 	width: 70%;
 	flex-wrap: wrap;
 	padding: 50px;
@@ -208,10 +209,52 @@ button.deletebtn:active {
 }
 
 h2 {
-	width: 106%;
+	width: 50%;
+	max-width: 60%;
+	margin-left: 27%;
+}
+
+.chat {
+	width: 90%;
+	margin-left: 25%;
 }
 
 .chat-container {
-	height: 300px;
+	height: 35%;
+	width: 50%;
 	overflow-y: scroll;
+	background-color: white;
+}
+
+#imgChat {
+	height: 40px;
+	width: 40px;
+	object-fit: cover;
+	float: left;
+	padding: 5px;
+	padding-right: 15px;
+}
+
+.text-to-chat {
+	width: 50%;
+	height: 50px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	resize: none;
+}
+
+.chatMsg {
+	display: block;
+	height: 70px;
+	background: #dadada;
+}
+
+.chatMsg:nth-child(even) {
+	background: #adadad;
+}
+
+.chatText {
+	font-size: 0.8rem;
 }

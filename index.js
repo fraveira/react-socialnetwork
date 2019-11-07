@@ -316,12 +316,10 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('My amazing chat message', function(newMessage) {
-		console.log('My amazing chat NEW message: ', newMessage);
 		db
 			.postNewMessage(newMessage, userId)
 			.then(() => {
 				db.getLastMessage(userId).then(({ rows }) => {
-					console.log('The rows from the socket', rows);
 					io.sockets.emit('chatMessage', rows);
 				});
 			})
