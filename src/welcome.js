@@ -15,7 +15,7 @@ const layoutWelcome = {
 export default function Welcome() {
 	return (
 		<div style={layoutWelcome}>
-			<img style={imgStyle} src="/assets/reactlogo.svg" />
+			<img style={imgStyle} src="/assets/logo.png" />
 			<h2>Welcome to your Social Network!</h2>
 			<HashRouter>
 				<div>

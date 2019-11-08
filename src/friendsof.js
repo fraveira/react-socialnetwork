@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from './axios';
 
+const imgFriendsStyle = {
+	width: '10em'
+};
+
+const lisFriends = {
+	display: 'inline-block',
+	marginRight: '50px'
+};
+
 export default function Friendsof({ visitedId }) {
-	const [ peoples, setTheirFriends ] = useState([]);
+	const [ theirFriends, setTheirFriends ] = useState([]);
 	useEffect(
 		() => {
 			(async () => {
@@ -25,17 +34,16 @@ export default function Friendsof({ visitedId }) {
 
 	return (
 		<div>
-			<h2>These are their friends</h2>
+			<h2>These are the friends of your friend!</h2>
 			<ul>
-				{peoples.map((people) => (
-					<li key={people.first}>
+				{theirFriends.map((friends) => (
+					<li style={lisFriends} key={friends.first}>
 						<h3>
-							{people.first}
-							{people.last}
+							{friends.first} {friends.last}
 						</h3>
-						<a href={'/user/' + people.id}>
+						<a href={'/user/' + friends.id}>
 							{' '}
-							<img src={people.profilepicture} />
+							<img style={imgFriendsStyle} src={friends.profilepicture} />
 						</a>
 					</li>
 				))}

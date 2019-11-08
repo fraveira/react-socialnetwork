@@ -40,8 +40,7 @@ export default function Friends() {
 						{friends.map((user) => (
 							<li style={friends_lis} key={user.first}>
 								<h3>
-									{user.first}
-									{user.last}
+									{user.first} {user.last}
 								</h3>
 								<a href={'/user/' + user.id}>
 									<img style={friends_img} src={user.profilepicture} />
@@ -60,8 +59,7 @@ export default function Friends() {
 						{wannabes.map((user) => (
 							<li style={friends_lis} key={user.first}>
 								<h3>
-									{user.first}
-									{user.last}
+									{user.first} {user.last}
 								</h3>
 								<a href={'/user/' + user.id}>
 									<img style={friends_img} src={user.profilepicture} />

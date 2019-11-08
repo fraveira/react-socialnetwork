@@ -59,8 +59,7 @@ export default function FindPeople() {
 				{peoples.map((people) => (
 					<li style={searcher_lis} key={people.first}>
 						<h3>
-							{people.first}
-							{people.last}
+							{people.first} {people.last}
 						</h3>
 						<a href={'/user/' + people.id}>
 							{' '}
