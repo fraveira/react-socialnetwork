@@ -72,6 +72,25 @@ nav {
 	padding: 50px;
 }
 
+button.biobtn {
+	width: 30%;
+
+	display: inline-block;
+	padding: 0.7em 1.7em;
+	margin-left: 30%;
+	border-radius: 0.2em;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	color: #ffffff;
+	background-color: #00a71c;
+	box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17), inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
+		inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+	text-align: center;
+	position: relative;
+}
+
 .nameInProfile {
 	font-size: 2.5rem;
 }
@@ -126,10 +145,8 @@ button.loginbtn:active {
 
 button.editbtn {
 	width: 30%;
-	margin: 0 0.3em 0.3em 0;
 	margin-top: 15px;
 	margin-left: 40%;
-	margin-right: 40%;
 	display: inline-block;
 	padding: 0.7em 1.7em;
 	border-radius: 0.2em;
@@ -150,10 +167,8 @@ button.editbtn:active {
 
 button.deletebtn {
 	width: 30%;
-	margin: 0 0.3em 0.3em 0;
 	margin-top: 15px;
 	margin-left: 40%;
-	margin-right: 40%;
 	display: inline-block;
 	padding: 0.7em 1.7em;
 	border-radius: 0.2em;

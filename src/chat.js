@@ -11,7 +11,6 @@ export default function Chat() {
 			if (!elemRef) {
 				return null;
 			}
-			console.log('Chat mounted');
 			elemRef.current.scrollTop = elemRef.current.scrollHeight - elemRef.current.clientHeight;
 		},
 		[ chatMessages ]

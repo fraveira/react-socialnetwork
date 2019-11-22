@@ -11,7 +11,6 @@ export default class Bioedit extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('Bio mounted!');
 		this.setState({
 			bio: this.state.bio
 		});
@@ -49,7 +48,7 @@ export default class Bioedit extends React.Component {
 				{!this.props.bio &&
 				!this.state.bioIsOn && (
 					<button
-						className="submitbtn"
+						className="biobtn"
 						onClick={() =>
 							this.setState({
 								bioIsOn: !this.state.bioIsOn
@@ -94,7 +93,7 @@ export default class Bioedit extends React.Component {
 								this.setState({ bio: e.target.value });
 							}}
 						/>
-						<button className="submitbtn" onClick={() => this.editBio()}>
+						<button className="submibtbtn" onClick={() => this.editBio()}>
 							Save Changes
 						</button>
 					</div>

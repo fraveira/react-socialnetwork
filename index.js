@@ -285,7 +285,6 @@ app.get('/friends-wannabes/', async (req, res) => {
 
 app.get('/api/friendsof/:id', async (req, res) => {
 	const myFriend = Number(req.params.id);
-	console.log('Getting here, friendsof get route');
 	try {
 		const { rows } = await db.getFriendsOf(myFriend);
 		res.json(rows);
@@ -311,14 +310,13 @@ app.get('*', function(req, res) {
 	}
 });
 
-server.listen(8080, function() {
+server.listen(process.env.PORT || 8080, function() {
 	console.log("I'm listening.");
 });
 
 // SERVER SIDE SOCKET CODE:
 
 io.on('connection', function(socket) {
-	console.log(`socket with the id ${socket.id} is connected NOW`);
 	if (!socket.request.session.userId) {
 		return socket.disconnect(true);
 	}

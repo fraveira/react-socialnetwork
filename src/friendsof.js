@@ -17,15 +17,12 @@ export default function Friendsof({ visitedId }) {
 			(async () => {
 				const { data } = await axios.get(`/get-initial-status/${visitedId}`);
 				if (data.accepted == true) {
-					console.log('Give me this console dat log');
-					console.log('This is the visited id, they are my FRIENDS', visitedId);
 					(async () => {
 						const { data } = await axios.get(`/api/friendsof/${visitedId}`); // Rewrite this to a working route.
-						console.log('Esta es la data conseguida', data);
 						setTheirFriends(data);
 					})();
 				} else {
-					console.log("They are not friends, don't show any div");
+					console.log('Work to show no div if they aren not friends');
 				}
 			})();
 		},

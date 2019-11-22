@@ -6,7 +6,6 @@ import Profile from './profile';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { OtherProfile } from './otherprofile';
 import FindPeople from './findpeople';
-import FriendButton from './friendbtn';
 import Friends from './friends';
 import Chat from './chat';
 
@@ -26,9 +25,9 @@ export class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			first: '', // modify this. Get what the db returns.
-			last: '', // modify this.
-			img: '', // Starting with no picture now.
+			first: '',
+			last: '',
+			img: '',
 			bio: '',
 			file: null,
 			uploaderIsVisible: false
