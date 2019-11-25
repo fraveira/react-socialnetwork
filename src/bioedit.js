@@ -41,8 +41,7 @@ export default class Bioedit extends React.Component {
 			<React.Fragment>
 				<p className="nameInProfile">
 					{' '}
-					<span className="helloInProfile">Hello</span> ,
-					{this.props.first}!
+					<span className="helloInProfile">Welcome to your Profile,</span> {this.props.first}!
 				</p>
 				<p className="form-control">{this.props.bio}</p>
 				{!this.props.bio &&

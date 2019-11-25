@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from './axios';
+import { Link } from 'react-router-dom';
 
 const welcomeForm = {
 	display: 'block',
@@ -65,9 +66,12 @@ export default class Login extends React.Component {
 					type="password"
 					onChange={(e) => this.handleChange(e)}
 				/>
-				<button className="submitbtn" onClick={() => this.submit()}>
-					Submit
+				<button className="registerbtn" onClick={() => this.submit()}>
+					Log In
 				</button>
+				<Link to="/">
+					<button className="loggerbtn">or Register</button>
+				</Link>
 			</div>
 		);
 	}
