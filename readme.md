@@ -6,7 +6,7 @@ Fully Functional social network: with live Chat, picture uploading, profiles, fr
 
 Built with React (Hooks, Redux and Webpack), Bootstrap 4, NodeJS and Postgresql.
 
-![socialnet](https://github.com/fraveira/petition-website/blob/fraveira/public/socialgif.gif)
+![socialnet](https://github.com/fraveira/react-socialnetwork/blob/master/public/socialgif.gif)
 
 ### Deployed in Heroku: 
 
